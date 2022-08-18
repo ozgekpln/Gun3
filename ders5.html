@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <button type="button" onclick="lokasyonAl()">Konum Bilgisi</button> 
+  <br>
+      <label style=" color:red">İsim:</label>
+
+      <input type="text" id="isim" />
+      <br>
+      <label style=" color:red">Soyisim:</label>
+      <input type="text" id="soyisim" />
+<br>
+      <button type="button" onclick="veriSakla()">Veriyi Sakla</button>
+    
+      <p id="veri"></p>
+      <p id="veri2"></p>
+      <p id="veri3"></p>
+      <p id="veri4"></p>
+
+
+    <p id="lokasyon" ></p>
+    <br><br>
+    <button type="button" onclick="veriyiGetir()">Veriyi Getir</button>
+
+
+
+    <br>
+    <h6><a href="index.html" > Ana Sayfaya Dön </a></h6>
+
+    
+  
+  <script>
+
+    
+var lokasyon= document.getElementById("lokasyon");
+        function lokasyonAl(){
+            if(navigator.geolocation){
+
+                navigator.geolocation.getCurrentPosition(showPosition);
+            }
+            else{
+                lokasyon.innerHTML="Konum bulunamadı";
+
+
+            }
+
+        
+        }
+    function showPosition(position){
+        
+        lokasyon.innerHTML="Enlem: "+ position.coords.latitude+ "<br> Boylam: "+ position.coords.longitude;
+ 
+      localStorage.setItem("enlem", position.coords.latitude);
+
+      localStorage.setItem("boylam", position.coords.longitude);
+
+    }
+  
+  
+  function veriSakla() {
+  
+      var isim = document.getElementById("isim").value;
+      localStorage.setItem("isim", isim);
+      var soyisim = document.getElementById("soyisim").value;
+      localStorage.setItem("soyisim", soyisim);
+      
+      
+
+  
+  }
+  function veriyiGetir() {
+      document.getElementById("veri").innerHTML = "İsim: "+ localStorage.getItem("isim");
+      document.getElementById("veri2").innerHTML = "Soyisim: "+ localStorage.getItem("soyisim");
+      document.getElementById("veri3").innerHTML = "Enlem: "+ localStorage.getItem("enlem");
+      document.getElementById("veri4").innerHTML = "Boylam:: "+ localStorage.getItem("boylam");
+
+  }
+
+
+</script>
+</body>
+</html>
